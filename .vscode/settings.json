@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./PythonCode/LZ77/compressor",
+        "./PythonCode/LZ77/decompressor"
+    ]
+}
