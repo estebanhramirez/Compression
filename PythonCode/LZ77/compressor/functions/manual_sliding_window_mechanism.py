@@ -1,6 +1,6 @@
 from typing import List
-from initialization_of_search_buffer import ini_search_buffer
-from manual_reproducible_extension import reproducible_extension
+from .initialization_of_search_buffer import ini_search_buffer
+from .manual_reproducible_extension import reproducible_extension
 
 """
     Function: Reproducible extensions inside the sliding window.
