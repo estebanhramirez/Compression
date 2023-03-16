@@ -38,6 +38,6 @@ class Compressor:
         reproducible_extensions = sliding_window_reproducible_extension(string, symb, self.n, self.l)
         for reproducible_extension in reproducible_extensions:
             pos, size, char = reproducible_extension
-            compressed_word = block(pos, size, char, self.n, self.l, self.alpha)
+            compressed_word = (pos, size, char) #block(pos, size, char, self.n, self.l, self.alpha)
             compressed_string.append(compressed_word)
         return compressed_string

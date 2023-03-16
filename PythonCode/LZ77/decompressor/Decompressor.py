@@ -34,7 +34,7 @@ class Decompressor:
         decompressed_string = []
         buffer = symb*(self.n - self.l)
         for block in compressed_string:
-            pos, size, char = deblock(block, self.alpha, self.n, self.l)
+            pos, size, char = (block[0], block[1], block[2]) # deblock(block, self.alpha, self.n, self.l)
             decompressed_string.append(reproduce_extension(buffer, pos, size, char))
             buffer += decompressed_string[-1]
             buffer = buffer[size+1 :]
