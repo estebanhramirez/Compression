@@ -133,8 +133,8 @@ vocab = {}
 
 # Get the index of the corresponding words. 
 for i, word in enumerate(sorted(voc_l)): 
-    vocab[word] = i       
-    
+    vocab[word] = i
+
 print("Vocabulary dictionary, key is the word, value is a unique integer")
 cnt = 0
 for k,v in vocab.items():
