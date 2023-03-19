@@ -434,7 +434,8 @@ def compute_accuracy(pred, y):
     # Zip together the prediction and the labels
     for prediction, y in zip(pred, y):
         # Split the label into the word and the POS tag
-        word_tag_tuple = y.split('\t')
+        word_tag_tuple = y.split('~')
+
         # Check that there is actually a word and a tag
         # no more and no less than 2 items
         if len(word_tag_tuple) != 2: # Replace None in this line with the proper condition.
@@ -442,7 +443,7 @@ def compute_accuracy(pred, y):
         # store the word and tag separately
         word, tag = word_tag_tuple
         # Check if the POS tag label matches the prediction
-        if prediction+'\n' == tag: # Replace None in this line with the proper condition.
+        if prediction == tag: # Replace None in this line with the proper condition.
             # count the number of times that the prediction
             # and label match
             num_correct += 1
@@ -457,18 +458,17 @@ def run():
         training_corpus = f.readlines()
 
     lines = training_corpus
-    print("\t\tWord", "\tTag\n")
 
-    for i in range(5):
-        print(f'line number {i+1}: {lines[i]}')
+    #for i in range(5):
+    #    print(f'line number {i+1}: {lines[i]}')
 
-    words = [line.split('\t')[0] for line in lines]
+    words = [line.split('~')[0] for line in lines]
     freq = defaultdict(int)
 
     for word in words:
         freq[word] += 1
 
-    vocab = [k for k, v in freq.items() if (v > 1 and k != '\n')]
+    vocab = [k for k, v in freq.items() if (v > 1 and k != '\n')] + ['--n--', '--unk--', '--unk_digit--', '--unk_punct--', '--unk_upper--', '--unk_noun--', '--unk_verb--', '--unk_adj--', '--unk_adv--']
     vocab.sort()
 
     with open('data/hmm_vocab.txt', 'w') as f:
@@ -485,15 +485,15 @@ def run():
     # Get the index of the corresponding words. 
     for i, word in enumerate(sorted(voc_l)): 
         vocab[word] = i
-
+    print("vocab")
     print(vocab)
 
-    """
+    #print(training_corpus)
     emission_counts, transition_counts, tag_counts = create_dictionaries(training_corpus, vocab)
-
     
+
     # get all the POS states
-    print(tag_counts)
+    print("tag_counts:", tag_counts)
     states = sorted(tag_counts.keys())
     print(f"Number of POS tags (number of 'states'): {len(states)}")
     print("View these POS tags (states)")
@@ -508,12 +508,13 @@ def run():
     for ex in list(emission_counts.items())[:2]:
         print (ex)
 
+
     # load in the test corpus
     with open("./data/WSJ_24.pos", 'r') as f:
         y = f.readlines()
 
 
-    words_y = [yi.split('\t')[0] for yi in y]
+    words_y = [yi.split('~')[0] for yi in y]
     with open('data/test.words', 'w') as f:
         for word_y in words_y:
             f.write(word_y+'\n')
@@ -521,6 +522,7 @@ def run():
     #corpus without tags, preprocessed
     _, prep = preprocess(vocab, "./data/test.words")
 
+    
     print('The length of the preprocessed test corpus: ', len(prep))
     print('This is a sample of the test_corpus: ')
     print(prep[0:10])
@@ -537,16 +539,28 @@ def run():
 
     accuracy_predict_pos = predict_pos(prep, y, emission_counts, vocab, states)
     print(f"Accuracy of prediction using predict_pos is {accuracy_predict_pos:.4f}")
+    
 
     alpha = 0.001
     A = create_transition_matrix(alpha, tag_counts, transition_counts)
     B = create_emission_matrix(alpha, tag_counts, emission_counts, list(vocab))
 
+
+    print(A)
+    print(B)
+
+    print("prep")
+    print(prep)
+
+    print("vocab")
+    print(vocab['--n--'])
+
     best_probs, best_paths = initialize(states, tag_counts, A, B, prep, vocab)
     best_probs, best_paths = viterbi_forward(A, B, prep, best_probs, best_paths, vocab)
+    print(best_probs)
     pred = viterbi_backward(best_probs, best_paths, prep, states)
+    print(pred)
     print(f"Accuracy of the Viterbi algorithm is {compute_accuracy(pred, y):.4f}")
-    """
-    
+
 # HASTA AQUI VOY
 run()

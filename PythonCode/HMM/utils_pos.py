@@ -162,8 +162,7 @@ def get_word_tag(line, vocab):
         tag = "--s--"
         return word, tag
     else:
-        print("linea ------------------->", line)
-        word, tag = line.split('\t')
+        word, tag = line.split('~')
         if word not in vocab: 
             # Handle unknown words
             word = assign_unk(word)
@@ -203,6 +202,7 @@ def preprocess(vocab, data_fp):
     assert(len(prep) == len(open(data_fp, "r").readlines()))
 
     return orig, prep
+
 # TO be deleted later 
 def get_frequency(tagged_corpus):
     '''
