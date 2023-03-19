@@ -1,5 +1,8 @@
  
+ A
  B
+ C
+ D
  E
  G
  I
@@ -9,6 +12,8 @@
  S
  T
  a
+ a 
+ an
  b
  c
  d
@@ -21,12 +26,17 @@
  k
  l
  m
+ mo
  n
  o
  p
  r
  s
  t
+ th
+ tha
+ the
+ the 
  to
  u
  v
@@ -44,24 +54,49 @@
 --unk_upper--
 --unk_verb--
 .
+1
+2
 H
 I
+M
 O
 P
+S
 T
 \
 a
+a 
+ab
+ac
+ad
+af
 ai
+ak
+al
 am
+an
+ap
+ar
 as
+at
+av
+ay
 b
 c
+cc
+ci
 d
 d 
 d.
 de
+do
 e
 e 
+e a
+e h
+e o
+e s
+e t
 e w
 e,
 e.
@@ -69,24 +104,44 @@ ea
 ec
 ed
 ee
+ef
 eg
+ek
 el
 em
 en
+eo
 er
+er 
 es
 et
+ev
+ew
+ey
 f
+f 
+fo
+fr
 g
 h
 h 
+ha
 he
 he 
+hee
 hi
+ho
 ht
+hu
 i
+ic
+ie
+if
+ig
+il
 im
 in
+ing
 is
 is t
 it
@@ -99,46 +154,92 @@ ll
 lo
 ly
 m
+me
 n
 n 
 n a
+n t
+n.
 n\
+na
+nc
 nd
 ne
 ng
 no
 nt
+nti
+nu
 o
 o 
+oa
 od
+of
+ol
 om
+on
 oo
+op
 or
+os
 ot
 ou
+ov
 ow
 p
+p 
+pe
+pl
+q
 r
+r 
 re
 ri
 rl
+rn
 ro
 rs
+rt
+ru
+ry
 s
 s 
 s a
+s s
+s,
+s.
 se
 si
 ss
 st
+su
 t
 t 
+t a
+t s
+t t
+t.
+tc
 te
+th
+th 
 ti
 to
+tr
+ts
 tt
+ty
 u
+ul
+un
 up
+ur
+us
+ut
 v
+ve 
 w
+wo
+x
 y
+y 

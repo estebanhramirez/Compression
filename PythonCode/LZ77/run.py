@@ -26,7 +26,7 @@ def build_datasets(compresor, decompresor):
                 txt = f.read()
                 txt = txt.replace("\t", "\\t")
                 txt = txt.replace("\n", "\\n")
-                txt = txt[:2000]
+                txt = txt[:5000]
                 #txt = 'esternocleidomastoideo'*10000
                 for i in range(0, len(txt)-100, 100):
                     subtxt = txt[i:i+100]
