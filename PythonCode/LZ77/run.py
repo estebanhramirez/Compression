@@ -26,8 +26,8 @@ def build_datasets(compresor, decompresor):
                 txt = f.read()
                 txt = txt.replace("\t", "\\t")
                 txt = txt.replace("\n", "\\n")
-                #txt = txt[:5000]
-                txt = 'a'*10000
+                txt = txt[:2000]
+                #txt = 'esternocleidomastoideo'*10000
                 for i in range(0, len(txt)-100, 100):
                     subtxt = txt[i:i+100]
                     mensaje_comprimido_train = compresor.compress(subtxt, symb='_')
@@ -47,7 +47,7 @@ def build_datasets(compresor, decompresor):
 
     test_corpus_tags = []
     test_corpus_word = []
-    testtxt = 'a'*600 # "mi nombre es esteban hernandez ramirez y esta es una prueba del compresor lz77 utlizando la metodologia de POS tagging que aprendi en el curso de NLP de coursera. Espero que esto me sirva para encontrar patrones interesantes en los datos y podemos modelos el algoritmo lz77 como una cadena de markov oculta donde los estados son los bloques de codigo y los emitidos son las cadenas de coincidencia encontradas por el algoritmo de comresion. In this thesis, we provide a mono-graphic review about how information theory is applied to lossless compression. For this end, some of the implementations of lossless compression in coding theory and their respective analysis are presented. Furthermore, the proofs, graphs, algorithms, and implementations in this thesis generalize some of the most important facts about binary encodings, that have been stated in the literature, to the general case of alphabets of arbitrary size. This naturally led us to a general definition of some of the main information measures in terms of codes. Finally, an application of lossless compression in machine learning is presented, for the classification of natural language, through the application of the LZ77 coding scheme to estimate some well known information measures derivatives in the literature, which are elaborated as a distance metric to compare languages with each other. The result of the classification is presented in the form of phylogenetic trees of natural language."
+    testtxt = "mi nombre es esteban hernandez ramirez y esta es una prueba del compresor lz77 utlizando la metodologia de POS tagging que aprendi en el curso de NLP de coursera. Espero que esto me sirva para encontrar patrones interesantes en los datos y podemos modelos el algoritmo lz77 como una cadena de markov oculta donde los estados son los bloques de codigo y los emitidos son las cadenas de coincidencia encontradas por el algoritmo de comresion. In this thesis, we provide a mono-graphic review about how information theory is applied to lossless compression. For this end, some of the implementations of lossless compression in coding theory and their respective analysis are presented. Furthermore, the proofs, graphs, algorithms, and implementations in this thesis generalize some of the most important facts about binary encodings, that have been stated in the literature, to the general case of alphabets of arbitrary size. This naturally led us to a general definition of some of the main information measures in terms of codes. Finally, an application of lossless compression in machine learning is presented, for the classification of natural language, through the application of the LZ77 coding scheme to estimate some well known information measures derivatives in the literature, which are elaborated as a distance metric to compare languages with each other. The result of the classification is presented in the form of phylogenetic trees of natural language."
     mensaje_comprimido_train = compresor.compress(testtxt, symb='_')
     mensaje_descomprimido_train = decompresor.decompress(mensaje_comprimido_train, symb='_')
     test_corpus_word += mensaje_descomprimido_train
@@ -58,8 +58,8 @@ def build_datasets(compresor, decompresor):
             f.write(word+'~'+str(tag)+'\n')
 
 def main():
-    window_size = 200
-    lookup_size = 20
+    window_size = 20
+    lookup_size = 5
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
                 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']

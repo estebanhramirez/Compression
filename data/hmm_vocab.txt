@@ -1,3 +1,39 @@
+ 
+ B
+ E
+ G
+ I
+ M
+ O
+ P
+ S
+ T
+ a
+ b
+ c
+ d
+ e
+ f
+ g
+ h
+ hi
+ i
+ k
+ l
+ m
+ n
+ o
+ p
+ r
+ s
+ t
+ to
+ u
+ v
+ w
+ y
+,
+-
 --n--
 --unk--
 --unk_adj--
@@ -7,6 +43,102 @@
 --unk_punct--
 --unk_upper--
 --unk_verb--
+.
+H
+I
+O
+P
+T
+\
 a
-aaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaa
+ai
+am
+as
+b
+c
+d
+d 
+d.
+de
+e
+e 
+e w
+e,
+e.
+ea
+ec
+ed
+ee
+eg
+el
+em
+en
+er
+es
+et
+f
+g
+h
+h 
+he
+he 
+hi
+ht
+i
+im
+in
+is
+is t
+it
+k
+l
+l 
+le
+li
+ll
+lo
+ly
+m
+n
+n 
+n a
+n\
+nd
+ne
+ng
+no
+nt
+o
+o 
+od
+om
+oo
+or
+ot
+ou
+ow
+p
+r
+re
+ri
+rl
+ro
+rs
+s
+s 
+s a
+se
+si
+ss
+st
+t
+t 
+te
+ti
+to
+tt
+u
+up
+v
+w
+y

@@ -12,27 +12,6 @@ adv_suffix = ["ward", "wards", "wise"]
 # Additive smoothing parameter
 alpha = 0.001
 
-
-def initialize_probs(states):
-    ''' 
-    Input: 
-        states: a set of possible parts of speech tags
-    Output: 
-        trans_probs: a dictionary where the keys are states the values are dictionaries where the keys are states and the 
-        values are 0.
-        
-    This dictionary will be later populated
-    '''
-    transition_probability = {}    # A dictionay of POS, 
-    for state in states:
-        transition_probability[state] = 0
-    trans_pos = {}
-    for state in states:
-        trans_pos[state] = transition_probability
-        
-    return trans_prob
-
-
 def get_states(tagged_corpus):
     '''
     Input:
