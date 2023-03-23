@@ -55,7 +55,7 @@ def min_edit_distance(source, target, ins_cost = 1, del_cost = 1, rep_cost = 2):
 
 def backtrace(D):
     n, m = D.shape
-    T = np.zeros((D.shape[0], D.shape[1]), dtype=int)
+    T = np.zeros((n, m), dtype=int)
     i, j = n-1, m-1
     flag = True
     while flag:
@@ -64,42 +64,51 @@ def backtrace(D):
                 flag = False
             else:
                 if (j - 1) < 0:
+                    print('del')
                     T[i, j] = -1
                     i -= 1
                 elif (i - 1) < 0:
+                    print('ins')
                     T[i, j] = +1
                     j -= 1
                 else:
                     if D[i, j-1] <= D[i-1, j-1] and D[i, j-1] <= D[i-1, j]:
+                        print('ins')
                         T[i, j] = +1
                         j -= 1
                     elif D[i-1, j] <= D[i-1, j-1] and D[i-1, j] <= D[i, j-1]:
+                        print('del')
                         T[i, j] = -1
                         i -= 1
                     elif D[i-1, j-1] <= D[i, j-1] and D[i-1, j-1] <= D[i-1, j]:
+                        print('sub')
                         T[i, j] = 2
                         i -= 1
                         j -= 1
         else:
             if D[i-1, j-1] == D[i, j]:
+                print('non')
                 T[i, j] = 0
                 i -= 1
                 j -= 1
             else:
                 if D[i, j-1] <= D[i-1, j-1] and D[i, j-1] <= D[i-1, j]:
+                    print('ins')
                     T[i, j] = +1
                     j -= 1
                 elif D[i-1, j] <= D[i-1, j-1] and D[i-1, j] <= D[i, j-1]:
+                    print('del')
                     T[i, j] = -1
                     i -= 1
                 elif D[i-1, j-1] < D[i, j-1] and D[i-1, j-1] <= D[i-1, j]:
+                    print('sub')
                     T[i, j] = 2
                     i -= 1
                     j -= 1
     return T
 
 
-D_matrix, min_edit_distance = min_edit_distance('abbaabb','baba')
+D_matrix, min_edit_distance = min_edit_distance('isnt','hint', ins_cost = 1, del_cost = 1, rep_cost = 1)
 print(min_edit_distance)
 print(D_matrix)
 
