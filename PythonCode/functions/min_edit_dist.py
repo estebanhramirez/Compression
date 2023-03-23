@@ -100,11 +100,26 @@ def backtrace(D):
                     j -= 1
     return T, path[::-1]
 
+def interpretate(path):
+    for i in range(0, len(path)-1):
+        vec1 = path[i]
+        vec2 = path[i+1]
+        diff = (abs(vec1[0]-vec2[0]), abs(vec1[1]-vec2[1]))
+        if diff[0] == 1 and diff[1] == 1:
+            print("substitution")
+        else:
+            if diff[0] == 1:
+                print("deletion")
+            if diff[1] == 1:
+                print("insertion")
 
-D_matrix, min_edit_distance = min_edit_distance('abbaabb','baba', ins_cost = 1, del_cost = 1, rep_cost = 1)
+
+D_matrix, min_edit_distance = min_edit_distance('isnt','hint', ins_cost = 1, del_cost = 1, rep_cost = 1)
 print(min_edit_distance)
 print(D_matrix)
 
 T_matrix, path_vector = backtrace(D_matrix)
 
+#print(T_matrix)
 print(path_vector)
+interpretate(path_vector)
