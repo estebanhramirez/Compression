@@ -58,59 +58,53 @@ def backtrace(D):
     T = np.zeros((n, m), dtype=int)
     i, j = n-1, m-1
     flag = True
+    path = []
     while flag:
+        path.append((i, j))
         if (i - 1) < 0 or (j - 1) < 0:
             if (i - 1) < 0 and (j - 1) < 0:
                 flag = False
             else:
                 if (j - 1) < 0:
-                    print('del')
                     T[i, j] = -1
                     i -= 1
                 elif (i - 1) < 0:
-                    print('ins')
                     T[i, j] = +1
                     j -= 1
                 else:
                     if D[i, j-1] <= D[i-1, j-1] and D[i, j-1] <= D[i-1, j]:
-                        print('ins')
                         T[i, j] = +1
                         j -= 1
                     elif D[i-1, j] <= D[i-1, j-1] and D[i-1, j] <= D[i, j-1]:
-                        print('del')
                         T[i, j] = -1
                         i -= 1
                     elif D[i-1, j-1] <= D[i, j-1] and D[i-1, j-1] <= D[i-1, j]:
-                        print('sub')
                         T[i, j] = 2
                         i -= 1
                         j -= 1
         else:
             if D[i-1, j-1] == D[i, j]:
-                print('non')
                 T[i, j] = 0
                 i -= 1
                 j -= 1
             else:
                 if D[i, j-1] <= D[i-1, j-1] and D[i, j-1] <= D[i-1, j]:
-                    print('ins')
                     T[i, j] = +1
                     j -= 1
                 elif D[i-1, j] <= D[i-1, j-1] and D[i-1, j] <= D[i, j-1]:
-                    print('del')
                     T[i, j] = -1
                     i -= 1
                 elif D[i-1, j-1] < D[i, j-1] and D[i-1, j-1] <= D[i-1, j]:
-                    print('sub')
                     T[i, j] = 2
                     i -= 1
                     j -= 1
-    return T
+    return T, path[::-1]
 
 
-D_matrix, min_edit_distance = min_edit_distance('isnt','hint', ins_cost = 1, del_cost = 1, rep_cost = 1)
+D_matrix, min_edit_distance = min_edit_distance('abbaabb','baba', ins_cost = 1, del_cost = 1, rep_cost = 1)
 print(min_edit_distance)
 print(D_matrix)
 
-T = backtrace(D_matrix)
-print(T)
+T_matrix, path_vector = backtrace(D_matrix)
+
+print(path_vector)
