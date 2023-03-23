@@ -14,7 +14,7 @@ from Decompressor import Decompressor
 from Compressor import Compressor
 
 
-def build_datasets(compresor, decompresor):
+def build_train_corpus(compresor, decompresor):
     path = 'data/TXTs/dummy.txt'
     dir_path = os.path.dirname(os.path.realpath(path))
 
@@ -26,10 +26,9 @@ def build_datasets(compresor, decompresor):
                 txt = f.read()
                 txt = txt.replace("\t", "\\t")
                 txt = txt.replace("\n", "\\n")
-                txt = txt[:5000]
-                #txt = 'esternocleidomastoideo'*10000
-                for i in range(0, len(txt)-100, 100):
-                    subtxt = txt[i:i+100]
+                txt = txt[:6000]
+                for i in range(0, len(txt)-36, 36):
+                    subtxt = txt[i:i+36]
                     mensaje_comprimido_train = compresor.compress(subtxt, symb='_')
                     mensaje_descomprimido_train = decompresor.decompress(mensaje_comprimido_train, symb='_')
                     train_corpus_word += mensaje_descomprimido_train + ['\n']
@@ -42,12 +41,12 @@ def build_datasets(compresor, decompresor):
             else:    
                 tag = '('+str(block[0])+','+str(block[1])+','+block[2]+')'
                 f.write(word+'~'+str(tag)+'\n')
-    
 
 
+def build_test_corpus(compresor, decompresor):
     test_corpus_tags = []
     test_corpus_word = []
-    testtxt = "mi nombre es esteban hernandez ramirez y esta es una prueba del compresor lz77 utlizando la metodologia de POS tagging que aprendi en el curso de NLP de coursera. Espero que esto me sirva para encontrar patrones interesantes en los datos y podemos modelos el algoritmo lz77 como una cadena de markov oculta donde los estados son los bloques de codigo y los emitidos son las cadenas de coincidencia encontradas por el algoritmo de comresion. In this thesis, we provide a mono-graphic review about how information theory is applied to lossless compression. For this end, some of the implementations of lossless compression in coding theory and their respective analysis are presented. Furthermore, the proofs, graphs, algorithms, and implementations in this thesis generalize some of the most important facts about binary encodings, that have been stated in the literature, to the general case of alphabets of arbitrary size. This naturally led us to a general definition of some of the main information measures in terms of codes. Finally, an application of lossless compression in machine learning is presented, for the classification of natural language, through the application of the LZ77 coding scheme to estimate some well known information measures derivatives in the literature, which are elaborated as a distance metric to compare languages with each other. The result of the classification is presented in the form of phylogenetic trees of natural language."
+    testtxt = "my name is esteban hernandez and i am a colombia applied mathematician and computer scientist who was born in girardot cundinamarca and currently has twenty two years old. for my thesis i worked on information theory and still working on it until now. how i can make something great soon. this is my dream. thanks for your time and have a great day. see you soon buddy."
     mensaje_comprimido_train = compresor.compress(testtxt, symb='_')
     mensaje_descomprimido_train = decompresor.decompress(mensaje_comprimido_train, symb='_')
     test_corpus_word += mensaje_descomprimido_train
@@ -57,8 +56,9 @@ def build_datasets(compresor, decompresor):
             tag = '('+str(block[0])+','+str(block[1])+','+block[2]+')'
             f.write(word+'~'+str(tag)+'\n')
 
+
 def main():
-    window_size = 20
+    window_size = 10
     lookup_size = 5
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
@@ -67,7 +67,10 @@ def main():
     compresor = Compressor(window_size, lookup_size, alphabet)
     decompresor = Decompressor(window_size, lookup_size, alphabet)
 
-    build_datasets(compresor, decompresor)
+    build_train_corpus(compresor, decompresor)
+    build_test_corpus(compresor, decompresor)
+
+    text = ['(0,0,m)', '(0,0,y)', '--s--', '(0,0,n)', '(0,0,a)', '(0,0,x)', '(0,0,i)', '(0,0,s)', '(0,0,e)', '(3,1,t)', '(0,0,z)\n', '(0,0,a)\n', '(0,0,n)\n', '--s--', '(0,0,h)\n', '(0,0,e)\n', '(0,0,r)\n', '(1,1,b)\n', '(2,1,d)\n', '(0,0,e)\n', '(0,1,l)\n', '--s--', '(0,0,a)\n', '(0,0,n)\n', '(0,0,d)\n', '(0,1,d)\n', '(0,0,a)\n', '(0,0,m)\n', '(0,0,a)\n', '(0,0,c)\n', '(0,0,o)\n', '(0,0,l)\n', '(0,1,m)\n', '(0,0,b)\n', '(0,1,m)\n', '(0,0,a)\n', '--s--', '(0,0,y)\n', '(2,1,l)\n', '(0,0,i)\n', '(0,0,e)\n', '(0,0,d)\n', '--s--', '(0,0,m)\n', '(0,0,a)\n', '(0,0,t)\n', '(0,0,h)\n', '(0,0,e)\n', '(2,1,s)\n', '(0,0,c)\n', '(4,1,e)\n', '(0,0,n)\n', '--s--', '(0,0,\ufeff)\n', '(0,0,c)\n', '(0,0,o)\n', '(0,0,m)\n', '(1,1,B)\n', '(0,0,u)\n', '(0,0,t)\n', '(0,0,e)\n', '(0,0,r)\n', '--s--', '(0,0,s)\n', '(0,0,c)\n', '(0,0,i)\n', '(0,0,e)\n', '(0,0,n)\n', '(0,0,t)\n', '(1,1,s)\n', '(0,0,t)\n', '(0,0,w)\n', '(0,0,h)\n', '(0,0,o)\n', '(4,1,k)\n', '(0,0,s)\n', '(0,0,b)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,n)\n', '(0,0,i)\n', '(1,2,s)\n', '(1,1,m)\n', '(0,0,a)\n', '(1,1,t)\n', '(0,0,o)\n', '(0,0,t)\n', '--s--', '(0,0,c)\n', '(0,0,u)\n', '(0,0,n)\n', '(0,0,d)\n', '(0,0,i)\n', '(3,1,a)\n', '(0,0,m)\n', '(1,1,s)\n', '(0,0,c)\n', '(0,0,a)\n', '(1,4,d)\n', '(2,3,u)\n', '(0,0,c)\n', '(0,0,u)\n', '(0,0,r)\n', '(0,1,e)\n', '(0,0,n)\n', '(0,0,t)\n', '(0,0,l)\n', '(0,0,y)\n', '--s--', '(0,0,h)\n', '(0,0,a)\n', '(0,0,s)\n', '(0,0,t)\n', '(0,0,w)\n', '(0,0,e)\n', '(0,0,n)\n', '(3,2,m)\n', '--s--', '(3,1,w)\n', '(0,0,o)\n', '(2,1,g)\n', '(0,0,e)\n', '(0,0,a)\n', '(0,0,r)\n', '(0,0,s)\n', '--s--', '(0,0,o)\n', '(0,0,l)\n', '(0,0,d)\n', '(0,0,.)\n', '(0,0,f)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,m)\n', '(0,0,y)\n', '(0,0,t)\n', '(0,0,h)\n', '(0,0,e)\n', '(0,0,s)\n', '(0,0,i)\n', '(0,0,s)\n', '(0,0,i)\n', '(0,0,w)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,k)\n', '(0,0,e)\n', '(0,0,d)\n', '--s--', '(0,0,o)\n', '(0,0,n)\n', '(0,0,i)\n', '(1,1,t)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,m)\n', '(0,0,a)\n', '(0,0,t)\n', '(0,0,i)\n', '(0,0,o)\n', '(0,0,n)\n', '--s--', '(2,1,h)\n', '(0,0,e)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,y)\n', '--s--', '(0,0,a)\n', '(0,0,n)\n', '(0,0,d)\n', '(0,0,s)\n', '(0,0,t)\n', '(0,0,i)\n', '(0,0,l)\n', '(0,0,l)\n', '(0,0,w)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,k)\n', '(0,0,i)\n', '(0,0,n)\n', '(0,0,g)\n', '--s--', '(0,0,o)\n', '(0,0,n)\n', '(0,0,i)\n', '(0,0,t)\n', '(0,0,u)\n', '(0,0,n)\n', '(2,1,e)\n', '(0,0,l)\n', '--s--', '(0,0,\ufeff)\n', '(0,0,w)\n', '(0,0,.)\n', '(0,1,M)\n', '(1,1,w)\n', '(0,0,i)\n', '(0,0,c)\n', '(0,0,a)\n', '(0,0,n)\n', '(0,0,m)\n', '(3,2,b)\n', '(0,0,e)\n', '(0,0,s)\n', '(0,0,o)\n', '(0,0,m)\n', '(0,1,t)\n', '(0,0,h)\n', '(0,0,i)\n', '(0,0,n)\n', '(0,0,g)\n', '--s--', '(0,0,\ufeff)\n', '(0,0,e)\n', '(0,0,a)\n', '(0,0,t)\n', '--s--', '(0,0,s)\n', '(0,0,o)\n', '(4,1,n)\n', '(0,0,.)\n', '--s--', '(0,0,t)\n', '(0,0,h)\n', '(0,0,i)\n', '(0,0,s)\n', '(0,0,i)\n', '(1,1, )\n', '(0,0,y)\n', '(1,1,o)\n', '(0,0,r)\n', '(0,0,e)\n', '(0,0,a)\n', '(0,0,m)\n', '(0,0,.)\n', '--s--', '(0,0,t)\n', '(0,0,h)\n', '(0,0,a)\n', '(0,0,n)\n', '(0,0,k)\n', '(0,0,s)\n', '--s--', '(0,0,f)\n', '(0,0,o)\n', '(0,0,r)\n', '(0,0,y)\n', '(0,1,u)\n', '(4,1,k)\n', '(0,0,i)\n', '(0,0,m)\n', '(0,0,e)\n', '(0,0,a)\n', '(0,0,n)\n', '(3,2,t)\n', '(0,0,h)\n', '(1,2,r)\n', '(0,0,e)\n', '(0,0,a)\n', '(0,0,g)\n', '(0,0,r)\n', '(0,0,e)\n', '(0,1,t)\n', '--s--', '(0,0,d)\n', '(4,1,l)\n', '(0,0,.)\n', '(1,1,E)\n', '(0,0,v)\n', '(0,0,e)\n', '(0,0,y)\n', '(0,0,o)\n', '(0,0,u)\n', '(0,0,s)\n', '(0,0,\\)\n', '(0,0,n)\n', '(0,2,r)\n', '(0,0,u)\n', '(0,0,d)\n', '(4,1,l)\n', '(0,0,.)\n']
 
     return 0
 

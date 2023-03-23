@@ -1,836 +1,283 @@
 m
-i
+y
  
 n
-o
-mb
-r
-e
- e
+a
+me
+ i
 s
- est
+ e
+st
 eb
 a
 n
- h
-er
+ 
+h
+e
+r
 na
 nd
-ez
- r
-am
-i
-re
-z y
- e
-s
-t
-a 
-es 
-u
-n
-a p
-r
-ue
-b
-a d
-el
- c
-o
-m
-pre
-s
-or
- l
+e
 z
-7
-7 
-u
-t
-li
-za
-n
-d
-o
- la
- m
-e
-to
-dol
-og
-i
-a d
-e 
-P
-O
-S
- t
-ag
-gin
-g 
-q
-u
-e
- a
-p
-r
-en
-d
-i 
-en 
-el
- c
-u
-rs
-o
- d
-e 
-N
-L
-P
- de c
-ou
-r
-s
-er
-a
-.
- E
-sp
-ero
- q
-u
-e 
-es
-t
-o m
-e s
-i
-r
-v
-a
- p
-ar
-a e
-n
-c
-o
-nt
-rar
- pat
-ro
-ne
-s
- i
-nt
-er
-esa
-ntes
- e
-n 
-l
-o
-s d
-at
-os y
- p
-od
-e
-m
-os m
-odel
-os e
-l 
-a
-lg
-or
-i
-t
-m
-o 
-lz
-7
-7 
-c
-om
-o u
-n
-a
- ca
-d
-e
-na d
-e 
-m
-ar
-k
-o
-v
- o
-c
-u
-l
-t
-a 
-d
-on
-de
- l
-os
- e
-st
-ad
-os s
-on
- l
-os b
-loq
-u
-e
-s d
-e 
-c
-od
-i
-g
-o 
-y
- l
-os
- e
-m
-it
-id
-os s
-on
- l
-a
-s c
-ad
-e
-na
-s d
-e 
-co
-i
-nc
-id
-enc
-ia
- e
-nco
-nt
-r
-ad
-as
- p
-or
- e
-l
- a
-lg
-ori
-t
-m
-o 
-d
-e 
-c
-om
-re
-s
-io
-n
-.
- I
-n 
-t
-h
-is
- the
-si
-s,
- w
-e 
-p
-r
-o
-v
-id
-e a
- m
-on
-o-
-g
-ra
-p
-h
-i
-c
- r
-e
-v
-ie
-w
- a
-b
-o
-u
-t
- h
-ow
- i
-n
-f
-or
-m
-a
-ti
-on
- t
-h
-e
-ory
- i
-s
- a
-p
-pl
-ie
-d
- t
-o
- l
-os
-sl
-es
-s 
-c
-om
-p
-r
-essi
-on
-.
- F
-or
- t
-h
-is
- e
-nd
-,
- s
-om
-e 
-of
- t
-h
-e i
-mp
-l
-em
-en
-ta
-ti
-o
-ns
  
-of
- l
-os
-sl
-e
-ss 
+a
+n
+d
+ i
+ a
+m
+ a 
 c
-om
-p
-r
-essi
-on
- i
-n c
-od
-ing
- t
-h
-e
-or
-y
- a
-nd
- thei
-r 
-re
-s
-p
-ec
-ti
-v
-e 
-a
-n
-al
-y
-si
-s 
-ar
-e p
-res
-en
-t
-ed
-.
- F
-u
-rt
-h
-er
-m
 o
-re
-,
- t
-he 
-p
-ro
-of
-s
-, g
-ra
-ph
-s, a
 l
-go
-ri
-t
-hm
-s, an
-d
- i
-mp
-l
-e
-me
-nt
-at
-io
-ns
- 
-in
- t
-h
-is
- the
-si
-s g
-en
-er
-a
-l
-iz
-e 
-so
-m
-e o
-f
- t
-h
-e m
-os
-t 
-i
-mp
-or
-ta
-n
-t f
-ac
-ts
- a
+om
 b
-ou
-t b
 i
-n
-ar
-y
- e
-nc
-od
-ing
-s
-,
- t
-h
 a
-t 
-hav
-e
- b
-ee
-n
- s
-ta
-te
-d
- i
-n t
-h
-e 
-l
-it
-er
-a
-tu
-re
-,
- t
-o
- th
-e 
-g
-en
-er
-a
-l
- c
-as
-e o
-f
- a
-lp
-h
-ab
-et
-s 
-of ar
-bi
-tr
-ary
- s
-iz
-e
-.
- T
-h
-is
- n
-a
-t
-u
-r
-al
-ly
- l
-e
-d
- u
-s
- t
-o
- a
- g
-en
-er
-al
- d
-ef
-i
-ni
-t
-io
-n 
-of
- s
-om
-e
- of t
-h
-e m
-a
-i
-n
- i
-nf
-or
-mat
-io
-n m
-e
-as
-u
-re
-s 
-in
- t
-er
-ms
- o
-f
- c
-od
-es
-.
- F
-i
-n
-a
-l
-ly
-,
- a
-n 
+ 
 ap
 pl
-ic
-at
-io
-n o
-f
- l
-os
-sl
+i
 e
-ss 
-c
-om
-p
-r
-essi
-on
- i
-n m
+d
+ 
+m
 a
-c
+t
 h
-ine
- l
-ea
+e
+mati
+c
+ia
+n
+ 
+and
+ c
+o
+m
+p
+u
+t
+e
 r
-ni
-ng
- i
+ 
 s
- p
+c
+i
+e
+n
+t
+is
+t 
+w
+h
+o
+ wa
+s
+ b
+o
+r
+n
+ i
+n g
+ir
+a
+rd
+o
+t
+ 
+c
+u
+n
+d
+i
+na
+m
+ar
+c
+a 
+an
+d
+ c
+u
+r
 re
-se
-nt
-ed
-,
+n
+t
+l
+y
+ 
+h
+a
+s
+ t
+w
+e
+n
+ty
+ 
+tw
+o
+ y
+e
+a
+r
+s
+ 
+o
+l
+d
+.
  f
 o
-r 
-th
-e 
-c
-l
-a
+r
+ m
+y
+ t
+h
+e
 s
-si
-fi
-ca
-ti
-o
-n
- o
-f 
-na
-tu
-r
-al
- l
-an
-g
-ua
-ge
-,
- t
-h
-r
-o
-ug
-h 
-the
- a
-p
-pl
 i
-c
-at
-io
-n
- o
-f
- t
-h
-e
- L
-Z
-7
-7 
-c
-od
-i
-n
-g
- s
-ch
-e
-m
-e 
-t
-o 
-es
-ti
-ma
-te
- s
-om
-e w
-el
-l 
-k
-n
-ow
-n 
-i
-nf
-or
-m
-a
-t
-io
-n m
-e
-as
-u
-re
 s 
+i 
+w
+o
+r
+k
+e
 d
-er
-i
-v
-at
-ive
-s i
-n
- t
-h
-e 
-l
-it
-er
-a
-tu
-re
-,
- w
-h
-ic
-h 
-ar
-e 
-el
-ab
-o
-ra
-t
-ed
- as
- a 
-di
-st
-an
-c
-e 
-m
-et
-r
-ic
- t
-o
- c
-om
-p
-a
-re
- l
-an
-g
-u
-ag
-es
- w
-i
-t
-h
- e
-ac
-h o
-the
-r
-.
- T
-he 
-re
-s
-u
-l
-t 
-o
-f
- t
-he c
-la
-ss
-i
-fi
-ca
-ti
+ 
 o
 n
  i
-s 
-p
-r
-e
-se
-nt
-ed
- in
- t
-h
-e 
-f
+nf
 o
 r
 m
- o
-f 
-p
-hy
-l
-og
-e
-n
-et
-i
-c
- t
-r
-ee
-s
- o
-f
- n
 a
-tu
-ra
+t
+i
+o
+n
+ 
+th
+e
+o
+r
+y
+ 
+a
+n
+d
+ s
+t
+i
 l
- l
-an
+l 
+w
+o
+r
+k
+i
+n
 g
-ua
-ge
+ 
+o
+n 
+i
+t
+ u
+n
+ti
+l
+ 
+no
+w
+.
+ h
+ow 
+i
+ c
+a
+n
+ m
+ak
+e
+ s
+o
+m
+et
+h
+i
+n
+g
+ 
+gr
+e
+a
+t
+ 
+s
+o
+on
+.
+ 
+t
+h
+i
+s
+ i
+s m
+y
+ d
+r
+e
+a
+m
+.
+ 
+t
+h
+a
+n
+k
+s
+ 
+f
+o
+r
+ y
+ou
+r t
+i
+m
+e
+ a
+n
+d
+ h
+av
+e
+ a
+ g
+r
+e
+at
+ 
+d
+ay
+.
+ s
+e
+e 
+y
+o
+u
+ s
+oo
+n
+ b
+u
+d
+dy
 .
