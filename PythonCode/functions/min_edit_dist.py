@@ -114,12 +114,17 @@ def interpretate(path):
                 print("insertion")
 
 
-D_matrix, min_edit_distance = min_edit_distance('isnt','hint', ins_cost = 1, del_cost = 1, rep_cost = 1)
-print(min_edit_distance)
+D_matrix, _ = min_edit_distance('bbabbababaaa','abab', ins_cost = 1, del_cost = 1, rep_cost = 2)
 print(D_matrix)
 
-T_matrix, path_vector = backtrace(D_matrix)
+#T_matrix, path_vector = backtrace(D_matrix)
 
 #print(T_matrix)
-print(path_vector)
-interpretate(path_vector)
+#print(path_vector)
+#interpretate(path_vector)
+print()
+D_matrix1, _ = min_edit_distance('bbabbababaaa', 'baaa', ins_cost = 1, del_cost = 1, rep_cost = 2)
+print(D_matrix1)
+print()
+D_matrix2, _ = min_edit_distance('baaa', 'abab', ins_cost = 1, del_cost = 1, rep_cost = 2)
+print(D_matrix2)
