@@ -45,7 +45,8 @@ def run():
     n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
 
     print('bigram counts')
-    print(make_count_matrix(n_plus1_gram_counts, unique_words))
+    count_matrix = make_count_matrix(n_plus1_gram_counts, unique_words)
+    print(count_matrix)
 
 
-run()
+#run()
