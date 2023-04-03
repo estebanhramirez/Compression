@@ -16,25 +16,23 @@ def extend(search_buffer, unique_words, probability_matrix):
     return maxword
 
 def run():
-    previous_n_gram_length = 3
-
     sentences = [['a', 'a', 'b', 'a', 'b', 'b', 'b', 'b', 'a', 'a', 'b', 'a', 'b'],]
                  #['b', 'b', 'a', 'b', 'a', 'a', 'a', 'a', 'b', 'b', 'a', 'b', 'a']]
-
     unique_words = list(set(sentences[0]))
-    n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
 
-    probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k=0)
-    print(probability_matrix)
-    #print(count_matrix.iloc[9])
-    #print(probability_matrix.loc[[('b', 'a', 'a')]])
-    #print(probability_matrix.loc[[('<s>', '<s>', '<s>')]])
-    #print()
-    #print(probability_matrix.loc[[('<s>', '<s>', '<s>')]]['<unk>'])
+    search_buffer = 'baa'
+    nextword = '' 
+    while nextword != '<e>':
+        print(search_buffer)
+        previous_n_gram_length = len(search_buffer)
 
-    for i in range(0, 3):
-        nextword = extend('baa', unique_words, probability_matrix)
-            
+        n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
+
+        probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k=0)
+
+        nextword = extend(search_buffer, unique_words, probability_matrix)
+        search_buffer = search_buffer + nextword
+    print(search_buffer)
 
 
 run()
