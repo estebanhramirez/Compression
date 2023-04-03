@@ -20,7 +20,7 @@ def run():
                  #['b', 'b', 'a', 'b', 'a', 'a', 'a', 'a', 'b', 'b', 'a', 'b', 'a']]
     unique_words = list(set(sentences[0]))
 
-    search_buffer = 'baa'
+    search_buffer = 'ba'
     nextword = '' 
     while nextword != '<e>':
         print(search_buffer)
