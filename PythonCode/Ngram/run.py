@@ -20,9 +20,11 @@ def run():
                  #['b', 'b', 'a', 'b', 'a', 'a', 'a', 'a', 'b', 'b', 'a', 'b', 'a']]
     unique_words = list(set(sentences[0]))
 
-    search_buffer = 'ba'
+    search_buffer_ini = 'baa'
+    search_buffer = search_buffer_ini
     nextword = '' 
-    while nextword != '<e>':
+    extension = ''
+    while nextword != '<e>' and extension in search_buffer_ini:
         print(search_buffer)
         previous_n_gram_length = len(search_buffer)
 
@@ -31,8 +33,9 @@ def run():
         probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k=0)
 
         nextword = extend(search_buffer, unique_words, probability_matrix)
-        search_buffer = search_buffer + nextword
-    print(search_buffer)
+        search_buffer += nextword
+        extension += nextword
+    print(search_buffer, '<-----')
 
 
 run()
