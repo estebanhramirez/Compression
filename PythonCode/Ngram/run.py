@@ -35,7 +35,7 @@ def naive_extend(search_buffer_ini, sentences, unique_words):
 
 
 def entropy_naive_extend(sentences, unique_words):
-    previous_n_gram_length = 4
+    previous_n_gram_length = 5
     n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
     probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k=0)
     for i in probability_matrix.index:
@@ -55,3 +55,4 @@ def run():
     entropy_naive_extend(sentences, unique_words)
 
 run()
+# HERE WE ARE :)
