@@ -67,7 +67,7 @@ def entropy_better_extend(sentences, unique_words, k):
     previous_n_gram_length = 3
     n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
     probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k=0)
-    print(probability_matrix)
+    #print(probability_matrix)
     for idx in probability_matrix.index:
         if not '<s>' in list(idx) and not '<e>' in list(idx):
             suffixes = []
@@ -75,25 +75,35 @@ def entropy_better_extend(sentences, unique_words, k):
                 suffixes.append(idx[i:])
 
             for suffix in suffixes:
-                print(suffix, len(suffix))
-                in_probability_matrix = probability_matrix
+                #print(suffix, len(suffix))
+                in_probability_matrix = probability_matrix.copy()
                 previous_n_gram = idx
                 cnt = 0
                 word = suffix[cnt]
                 prob = in_probability_matrix.loc[[previous_n_gram]][word][0]
-                while prob > 0 and cnt < len(suffix):
+                print(in_probability_matrix)
+                #print('P(',word,'|',''.join(previous_n_gram),')=',prob)
+                while prob > 0:
                     print('P(',word,'|',''.join(previous_n_gram),')=',prob)
                     previous_n_gram += tuple(word)
                     cnt += 1
+                    if cnt > len(suffix):
+                        print("YEAH")
+                        break
                     word = suffix[cnt]
-                    n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length)
-                    in_probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k)
+                    in_n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+cnt+1)
+                    print(in_n_plus1_gram_counts)
+                    in_probability_matrix = make_probability_matrix(in_n_plus1_gram_counts, unique_words, k)
+                    print(in_probability_matrix)
                     if previous_n_gram in in_probability_matrix.index:
                         prob = in_probability_matrix.loc[[previous_n_gram]][word][0]
                     else:
+                        print("NONONONONO")
                         prob = 0
                 print('P(',word,'|',''.join(previous_n_gram),')=',0)
+                print()
             print()
+            print('------------------------------')
 
 
 
