@@ -81,26 +81,23 @@ def entropy_better_extend(sentences, unique_words, k):
                 cnt = 0
                 word = suffix[cnt]
                 prob = in_probability_matrix.loc[[previous_n_gram]][word][0]
-                print(in_probability_matrix)
-                #print('P(',word,'|',''.join(previous_n_gram),')=',prob)
+                #print(in_probability_matrix)
+                print('P(',word,'|',''.join(previous_n_gram),')=',prob)
                 while prob > 0:
                     print('P(',word,'|',''.join(previous_n_gram),')=',prob)
                     previous_n_gram += tuple(word)
                     cnt += 1
-                    if cnt > len(suffix):
-                        print("YEAH")
+                    if cnt >= len(suffix):
                         break
                     word = suffix[cnt]
                     in_n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+cnt+1)
-                    print(in_n_plus1_gram_counts)
                     in_probability_matrix = make_probability_matrix(in_n_plus1_gram_counts, unique_words, k)
-                    print(in_probability_matrix)
+                    #print(in_probability_matrix)
                     if previous_n_gram in in_probability_matrix.index:
                         prob = in_probability_matrix.loc[[previous_n_gram]][word][0]
                     else:
-                        print("NONONONONO")
                         prob = 0
-                print('P(',word,'|',''.join(previous_n_gram),')=',0)
+                #print('P(',word,'|',''.join(previous_n_gram),')=',0)
                 print()
             print()
             print('------------------------------')
