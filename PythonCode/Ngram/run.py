@@ -64,9 +64,9 @@ def better_extend(search_buffer_ini, sentences, unique_words, k):
     print()
 
 def entropy_better_extend(sentences, unique_words, k):
-    previous_n_gram_length = 5
+    previous_n_gram_length = 7
     n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
-    probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k=0)
+    probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k)
     for idx in probability_matrix.index:
         suffixes = []
         for i in range(0, len(list(idx))):
@@ -78,10 +78,10 @@ def entropy_better_extend(sentences, unique_words, k):
             cnt = 0
             word = suffix[cnt]
             if previous_n_gram in in_probability_matrix.index and word in in_probability_matrix.columns:
-                prob = in_probability_matrix.loc[[previous_n_gram]][word][0]
+                prob = in_probability_matrix.loc[[previous_n_gram]][word][0]#+in_probability_matrix.loc[[previous_n_gram]]['<e>'][0]
             else:
                 prob = 0
-            print('P(',word,'|',''.join(previous_n_gram),')=',prob)
+            print('P(',word,'|',''.join(previous_n_gram),')=',prob, '----> cnt:', cnt)
 
             while prob > 0:
                 previous_n_gram += tuple(word)
@@ -94,10 +94,10 @@ def entropy_better_extend(sentences, unique_words, k):
                 in_n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+cnt+1)
                 in_probability_matrix = make_probability_matrix(in_n_plus1_gram_counts, unique_words, k)
                 if previous_n_gram in in_probability_matrix.index and word in in_probability_matrix.columns:
-                    prob = in_probability_matrix.loc[[previous_n_gram]][word][0]
+                    prob = in_probability_matrix.loc[[previous_n_gram]][word][0]#+in_probability_matrix.loc[[previous_n_gram]]['<e>'][0]
                 else:
                     prob = 0
-                print('P(',word,'|',''.join(previous_n_gram),')=',prob)
+                print('P(',word,'|',''.join(previous_n_gram),')=',prob, '----> cnt:', cnt)
             print()
         print('------------------------------')
 
@@ -105,19 +105,19 @@ def entropy_better_extend(sentences, unique_words, k):
 
 
 def run():
-    #path = 'data/TXTs/dummy.txt'
-    #dir_path = os.path.dirname(os.path.realpath(path))
-    #for root, dirs, files in os.walk(dir_path):
-    #    for file in files:
-    #        with open(dir_path+'/'+file, 'r') as f:
-    #            txt = f.read()
-    #            txt = txt[0:1000]
-    sentences = [['a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a']] #[['a', 'a', 'b', 'a', 'b', 'b', 'b', 'b', 'a', 'a', 'b', 'a', 'b'], ['b', 'b', 'a', 'b', 'a', 'a', 'a', 'a', 'b', 'b', 'a', 'b', 'a']]
-    unique_words = list(set(sentences[0]))
-    #search_buffer_ini = 'baa'
-    #naive_extend(search_buffer_ini, sentences, unique_words)
-    #entropy_naive_extend(sentences, unique_words, k=1)
-    entropy_better_extend(sentences, unique_words, k=0)
+    path = 'data/TXTs/dummy.txt'
+    dir_path = os.path.dirname(os.path.realpath(path))
+    for root, dirs, files in os.walk(dir_path):
+        for file in files:
+            with open(dir_path+'/'+file, 'r') as f:
+                #txt = f.read()
+                #txt = txt[10000:15000]
+                sentences = [['e', 's', 't', 'e', 'v', 'e', 'n', 'e', 's', 't', 'e', 'b']] # [['a', 'a', 'b', 'a', 'b', 'b', 'b', 'b', 'a', 'a', 'b', 'a', 'b']] # [list(txt)] # [['a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a']] #
+                unique_words = list(set(sentences[0]))
+                #search_buffer_ini = 'baa'
+                #naive_extend(search_buffer_ini, sentences, unique_words)
+                #entropy_naive_extend(sentences, unique_words, k=1)
+                entropy_better_extend(sentences, unique_words, k=0)
 
 
 run()
