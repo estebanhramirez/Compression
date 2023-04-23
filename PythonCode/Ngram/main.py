@@ -145,7 +145,7 @@ def main():
     correlation = correlation_information(n_gram_counts, probability_matrix, probability_matrix_minus1)
     print(correlation)
 
-    local_info_patterns(sentences, unique_words, txt5, 1)
+    local_info_patterns(sentences, unique_words, txt5, 2)
 
 
 main()
