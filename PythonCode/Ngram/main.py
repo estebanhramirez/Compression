@@ -44,9 +44,9 @@ def correlation_information(n_gram_counts, probability_matrix, probability_matri
     return (correlation)
 
 
-def plot(sentences):
+def plot(sentences, unique_words):
     k = 1
-    unique_words = list(set(sum(sentences, [])))
+    #unique_words = list(set(sum(sentences, [])))
     averages = []
     correlations = []
     effective_measure_complexity = 0
@@ -90,16 +90,57 @@ def local_info_patterns(sentences, unique_words, sentence, n):
     probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k)
 
     sentence = ['<s>']*n + sentence + ['<e>']
-    print(sentence)
+    print("sentences:", sentence)
     for i in range(n+1, len(sentence)):
-        conf = sentence[i]
+        conf = sentence[i-1]
         locality = sentence[i-n-1:i-1]
-        print(tuple(locality))
-        prob = probability_matrix.loc[[tuple(locality)]][conf][0]
+        print(tuple(locality), conf)
+        if tuple(locality) in probability_matrix.index:
+            prob = probability_matrix.loc[[tuple(locality)]][conf][0]
+        else:
+            prob = k
         local_information = np.log(1/prob)
         patterns.append(local_information)
+    print(patterns)
     plt.plot(patterns)
+    plt.grid()
+    plt.xlabel("string position")
     plt.savefig('patterns')
+    plt.close()
+
+
+def experiment(sentences, unique_words, sentence):
+    patterns = []
+
+    k = 0.01
+    previous_n_gram_length = 1
+    n = previous_n_gram_length
+
+    sentence = ['<s>']*n + sentence + ['<e>']
+    suffix = ()
+    while n < 10:
+        n_plus1_gram_counts = count_n_grams(sentences, n+1)
+        probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k)
+
+        max_idx = 0
+        maxi = probability_matrix.loc[[probability_matrix.index[max_idx]]][('a')][0]
+        for i, idx in enumerate(probability_matrix.index):
+            cur_max = probability_matrix.loc[[tuple(idx)]][('a')][0]
+            print(idx[-len(suffix):], "vs", suffix)
+            if cur_max >= maxi and idx[-len(suffix):] == suffix:
+                maxi = cur_max
+                max_idx = i
+
+        suffix = probability_matrix.index[max_idx]
+        print(probability_matrix.index[max_idx], ('a'))
+        patterns.append(probability_matrix.loc[[probability_matrix.index[max_idx]]][('a')][0])
+        n += 1
+
+    print(patterns)
+    plt.plot(patterns)
+    plt.grid()
+    plt.xlabel("string position")
+    plt.savefig('patterns inverse')
     plt.close()
 
 
@@ -113,19 +154,26 @@ def main():
                 txt = f.read()
                 #txt = txt[10000:15000]
     """
+
     k = 0.01
-    previous_n_gram_length = 2
+    previous_n_gram_length = 1
 
-    txt1 = ['a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b']
-    txt2 = ['a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b']
-    txt3 = ['a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b']
-    txt4 = ['a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b']
-    txt5 = ['a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'a', 'b', 'c', 'b', 'a', 'b', 'a', 'c', 'a', 'b', 'a', 'b', 'a', 'b']
-    sentences = [txt1, txt2, txt3, txt4, txt5] #[txt[0:100], txt[100:200], txt[200:300], txt[300:400], txt[400:500]] # [['a', 'b', 'a', 'c', 'a', 'd', 'a', 'f', 'a', 'g', 'a', 'h', 'a', 'i', 'a', 'j', 'a', 'k', 'a', 'l', 'a', 'm', 'a', 'n', 'a', 'o'], ['a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e', 'a', 'b', 'c', 'd', 'e'], ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',' u', 'v', 'w', 'x', 'y', 'z'], ['e', 's', 't', 'e', 'b', 'a', 'n', 'h', 'e', 'r', 'n', 'a', 'n', 'd', 'e', 'z', 'e', 's', 't', 'e', 'b', 'a', 'n', 'h', 'e', 'r', 'n', 'a', 'n', 'd', 'e', 'z'], ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']]
     unique_words = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',' j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] # list(set(sum(sentences, [])))
-    #plot(sentences)
 
+    # TRAINNING SET
+    txt1 = ['a', 'a', 'b']*1000
+    txt2 = ['a', 'a', 'a']*1000
+    txt3 = ['a', 'b', 'b']*1000
+    txt4 = ['b', 'b', 'a']*1000
+    txt5 = ['b', 'b', 'a']*1000
+    txt6 = ['b', 'a', 'b']*1000
+    txt7 = ['b', 'a', 'a']*1000
+    txt8 = ['b', 'b', 'b']*1000
+    txt9 = ['a', 'a', 'a']*1000
+    txt = ['a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b']
+    sentences = [txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9]
 
+    # PROBABILITY MODELS
     n_minus1_gram_counts = count_n_grams(sentences, previous_n_gram_length-1)
     n_gram_counts = count_n_grams(sentences, previous_n_gram_length)
     n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
@@ -145,7 +193,11 @@ def main():
     correlation = correlation_information(n_gram_counts, probability_matrix, probability_matrix_minus1)
     print(correlation)
 
-    local_info_patterns(sentences, unique_words, txt5, 2)
+    local_info_patterns(sentences, unique_words, txt, previous_n_gram_length)
+
+    experiment(sentences, unique_words, txt)
+
+    #plot(sentences, unique_words)
 
 
 main()
