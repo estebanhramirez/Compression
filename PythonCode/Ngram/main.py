@@ -124,6 +124,7 @@ def experiment(sentences, unique_words, sentence):
 
         max_idx = 0
         maxi = probability_matrix.loc[[probability_matrix.index[max_idx]]][('a')][0]
+
         for i, idx in enumerate(probability_matrix.index):
             cur_max = probability_matrix.loc[[tuple(idx)]][('a')][0]
             print(idx[-len(suffix):], "vs", suffix)
