@@ -169,6 +169,7 @@ def main():
     average_minus1 = average_uncertainty(n_minus1_gram_counts, probability_matrix_minus1)
     print(average_minus1)
 
+
     average = average_uncertainty(n_gram_counts, probability_matrix)
     print(average)
 

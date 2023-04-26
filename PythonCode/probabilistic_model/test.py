@@ -54,23 +54,41 @@ def find_patterns(sentences, unique_words, k, previous_n_gram, prev_prob):
     print("P(",previous_n_gram,") = ", prev_prob)
 
     previous_n_gram_length = len(previous_n_gram)
-    n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
 
+    n_gram_counts = count_n_grams(sentences, previous_n_gram_length)
+    n_plus1_gram_counts = count_n_grams(sentences, previous_n_gram_length+1)
+    n_plus2_gram_counts = count_n_grams(sentences, previous_n_gram_length+2)
+
+    probability_matrix_minus1 = make_probability_matrix(n_gram_counts, unique_words, k)
     probability_matrix = make_probability_matrix(n_plus1_gram_counts, unique_words, k)
+    probability_matrix_plus1 = make_probability_matrix(n_plus2_gram_counts, unique_words, k)
 
     try:
-        entropy = uncertainty(previous_n_gram, probability_matrix)
+        information = uncertainty(previous_n_gram, probability_matrix)
     except KeyError:
-        entropy = 0
+        information = k
 
-    threshold = entropy
+    try:
+        average_information = average_uncertainty(n_gram_counts, probability_matrix)
+    except KeyError:
+        average_information = k
+
+    try:
+        correlation_info = correlation_information(n_plus1_gram_counts, probability_matrix_plus1, probability_matrix, k)
+    except KeyError:
+        correlation_info = k
+
+    threshold = abs(information-correlation_info)
+    print("threshold:", threshold)
     for nxt in probability_matrix.columns:
         if tuple(previous_n_gram) in probability_matrix.index:
             prob = probability_matrix.loc[[tuple(previous_n_gram)]][nxt][0]
         else:
             prob = k
 
-        if np.log(1/prob)/prob < threshold:
+        info_content = abs(np.log(1/prob)-average_information)
+        if info_content < threshold:
+            print("information content:", info_content, '\n')
             find_patterns(sentences, unique_words, k, previous_n_gram+[nxt], prev_prob*prob)
 
 
@@ -87,7 +105,8 @@ def main():
     k = 0.01
     unique_words = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] # list(set(sum(sentences, [])))
 
-    txt = ['e', 's', 't', 'e', 'b', 'a', 'n', 'h', 'e', 'r', 'n', 'a', 'n', 'd', 'e', 'z', 'r', 'a', 'm', 'i', 'r', 'e', 'z']
+    #txt = ['a', 'b']*10
+    txt = ['a', 'a', 'b', 'b', 'b', 'a', 'a', 'b', 'b', 'b', 'a', 'a', 'b', 'b', 'b', 'a', 'a', 'b', 'b', 'b', 'a', 'a', 'b', 'b', 'b', 'a', 'a']
     sentences = [txt]
 
     find_patterns_wrapper(sentences, unique_words, k, [])
