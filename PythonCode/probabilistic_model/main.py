@@ -1,21 +1,17 @@
-import os
+"""
+    Title:
+    Author:
+    Date:
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from count_n_grams import count_n_grams
+from n_gram_probability import n_gram_probability
 from make_probability_matrix import make_probability_matrix
 
-
-def n_gram_probability(n_gram, n_gram_counts):
-    probability = n_gram_counts[n_gram] / sum(n_gram_counts.values())
-    return (probability)
-
-
-def uncertainty(previous_n_gram, probability_matrix):
-    entropy = 0
-    for nxt in probability_matrix.columns:
-        conditional_prob = probability_matrix.loc[[previous_n_gram]][nxt][0]
-        entropy += conditional_prob*np.log(1/conditional_prob)
-    return (entropy)
+from shannon_entropy import shannon_entropy as uncertainty
 
 
 def average_uncertainty(n_gram_counts, probability_matrix):
@@ -44,9 +40,7 @@ def correlation_information(n_gram_counts, probability_matrix, probability_matri
     return (correlation)
 
 
-def plot(sentences, unique_words):
-    k = 1
-    #unique_words = list(set(sum(sentences, [])))
+def plot(sentences, unique_words, k):
     averages = []
     correlations = []
     effective_measure_complexity = 0
@@ -64,11 +58,8 @@ def plot(sentences, unique_words):
         correlation = correlation_information(n_gram_counts, probability_matrix, probability_matrix_minus1)
         effective_measure_complexity += (i-1)*correlation
 
-        #print(average, correlation)
         averages.append(average)
         correlations.append(correlation)
-    averages = averages
-    correlations = correlations
 
     plt.plot(averages)
     plt.savefig('averages_pat2')
@@ -77,7 +68,8 @@ def plot(sentences, unique_words):
     plt.title('y(x) := mejora entre x y (x+1)')
     plt.savefig('correlations_pat2')
     plt.close()
-    print("--------------------------------------->", effective_measure_complexity)
+
+    print(effective_measure_complexity)
 
 
 def local_info_patterns(sentences, unique_words, sentence, n):
@@ -146,16 +138,6 @@ def experiment(sentences, unique_words, sentence):
 
 
 def main():
-    """
-    path = 'data/TXTs/dummy.txt'
-    dir_path = os.path.dirname(os.path.realpath(path))
-    for root, dirs, files in os.walk(dir_path):
-        for file in files:
-            with open(dir_path+'/'+file, 'r') as f:
-                txt = f.read()
-                #txt = txt[10000:15000]
-    """
-
     k = 0.01
     previous_n_gram_length = 1
 
@@ -171,7 +153,6 @@ def main():
     txt7 = ['b', 'a', 'a']*1000
     txt8 = ['b', 'b', 'b']*1000
     txt9 = ['a', 'a', 'a']*1000
-    txt = ['a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b', 'a', 'a', 'b']
     sentences = [txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9]
 
     # PROBABILITY MODELS
@@ -194,11 +175,11 @@ def main():
     correlation = correlation_information(n_gram_counts, probability_matrix, probability_matrix_minus1)
     print(correlation)
 
-    local_info_patterns(sentences, unique_words, txt, previous_n_gram_length)
+    #local_info_patterns(sentences, unique_words, txt, previous_n_gram_length)
 
-    experiment(sentences, unique_words, txt)
+    #experiment(sentences, unique_words, txt)
 
-    #plot(sentences, unique_words)
+    #plot(sentences, unique_words, k)
 
 
 main()

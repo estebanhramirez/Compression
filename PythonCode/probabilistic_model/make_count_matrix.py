@@ -35,6 +35,7 @@ def make_count_matrix(n_plus1_gram_counts, vocabulary):
     count_matrix = pd.DataFrame(count_matrix, index=n_grams, columns=vocabulary)
     return count_matrix
 
+
 def run():
     previous_n_gram_length = 2
 
